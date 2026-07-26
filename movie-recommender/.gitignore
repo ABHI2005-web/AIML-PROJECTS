@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+ml-100k/
+ml-100k.zip
+.DS_Store
+
+# Dataset files are NOT uploaded to GitHub (per course policy).
+# Run download_data.py to generate these locally / on the server.
+data/ratings.csv
+data/movies.csv

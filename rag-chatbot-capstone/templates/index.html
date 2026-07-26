@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World News Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <h1>🌍 World News Chatbot</h1>
+      <p>Ask about today's top headlines</p>
+      <button id="refresh-btn" title="Fetch fresh headlines">🔄 Refresh news</button>
+    </div>
+
+    <div id="chat-box" class="chat-box">
+      <div class="message bot">
+        Hey! Ask me something like "what's happening in tech today?" or
+        "any big business news?" and I'll check today's top headlines
+        for you. Heads up - this covers top stories across major
+        categories, not literally every news story out there.
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <input
+        type="text"
+        id="user-input"
+        placeholder="Ask about today's news..."
+        autocomplete="off"
+      />
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
+    const sendBtn = document.getElementById("send-btn");
+    const refreshBtn = document.getElementById("refresh-btn");
+
+    function addMessage(text, sender) {
+      const bubble = document.createElement("div");
+      bubble.className = "message " + sender;
+      bubble.innerText = text;
+      chatBox.appendChild(bubble);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      return bubble;
+    }
+
+    async function sendQuestion() {
+      const question = userInput.value.trim();
+      if (!question) return;
+
+      addMessage(question, "user");
+      userInput.value = "";
+      sendBtn.disabled = true;
+
+      const thinkingBubble = addMessage("Checking the headlines...", "bot");
+
+      try {
+        const response = await fetch("/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: question }),
+        });
+        const data = await response.json();
+        thinkingBubble.innerText = data.answer;
+      } catch (err) {
+        thinkingBubble.innerText =
+          "Something went wrong reaching the server. Try again in a bit.";
+      }
+
+      sendBtn.disabled = false;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function refreshNews() {
+      refreshBtn.disabled = true;
+      const originalText = refreshBtn.innerText;
+      refreshBtn.innerText = "Refreshing...";
+
+      try {
+        const response = await fetch("/refresh", { method: "POST" });
+        const data = await response.json();
+        addMessage(data.message, "bot");
+      } catch (err) {
+        addMessage("Couldn't refresh news right now, try again shortly.", "bot");
+      }
+
+      refreshBtn.innerText = originalText;
+      refreshBtn.disabled = false;
+    }
+
+    sendBtn.addEventListener("click", sendQuestion);
+    refreshBtn.addEventListener("click", refreshNews);
+
+    userInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        sendQuestion();
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+CATEGORY: NOTICE
+HEADLINE: This is offline demo data, not live news
+SOURCE: N/A
+PUBLISHED: N/A
+SUMMARY: No GNEWS_API_KEY was set when this app started, so it could not
+fetch real live news. Once you add a free GNews API key (from gnews.io) as
+an environment variable called GNEWS_API_KEY and restart the app, this file
+gets replaced automatically with real, current headlines pulled live from
+GNews across categories like world news, business, technology, sports,
+health, and science.
+LINK:
+
+---
+
+CATEGORY: NOTICE
+HEADLINE: How to get real news working
+SOURCE: N/A
+PUBLISHED: N/A
+SUMMARY: Go to gnews.io, sign up for a free account, copy your API key,
+then set it as GNEWS_API_KEY in your environment (locally in a .env file,
+or in Render's Environment tab if deployed). Restart the app and it will
+automatically fetch real, current headlines the next time it starts.
+
+---

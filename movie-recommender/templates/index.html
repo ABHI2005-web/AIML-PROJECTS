@@ -1,0 +1,87 @@
+<!--
+========================================================
+ index.html
+========================================================
+This is the webpage that users see in their browser.
+It has:
+  1. A dropdown to pick a user ID
+  2. A button to get recommendations
+  3. A list of movies the user already watched (if a user is picked)
+  4. A list of NEW recommended movies (if a user is picked)
+========================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>🎬 Movie Recommendation System</h1>
+        <p class="subtitle">Pick a user ID to see personalized movie recommendations, based on MovieLens ratings.</p>
+
+        <!-- Form to select a user -->
+        <form action="/recommend" method="POST" class="user-form">
+            <label for="user_id">Choose a User ID:</label>
+            <select name="user_id" id="user_id" required>
+                <option value="" disabled {% if not selected_user %}selected{% endif %}>-- Select a user --</option>
+                {% for user in users %}
+                    <option value="{{ user }}" {% if selected_user == user %}selected{% endif %}>
+                        User {{ user }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        <!-- Only show results if a user has been selected -->
+        {% if selected_user %}
+
+            <div class="results">
+
+                <!-- Left column: movies the user already watched -->
+                <div class="column">
+                    <h2>Movies User {{ selected_user }} Already Watched</h2>
+                    {% if watched_movies %}
+                        <ul class="movie-list">
+                        {% for movie in watched_movies %}
+                            <li>
+                                <span class="title">{{ movie.title }}</span>
+                                <span class="rating">⭐ {{ movie.rating }}</span>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>This user has no watch history.</p>
+                    {% endif %}
+                </div>
+
+                <!-- Right column: new recommended movies -->
+                <div class="column">
+                    <h2>Recommended Movies For User {{ selected_user }}</h2>
+                    {% if recommendations %}
+                        <ul class="movie-list recommend-list">
+                        {% for movie in recommendations %}
+                            <li>
+                                <span class="title">{{ movie.title }}</span>
+                                <span class="score">Match score: {{ movie.score }}</span>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No recommendations found for this user yet.</p>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
