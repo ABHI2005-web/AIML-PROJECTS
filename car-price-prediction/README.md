@@ -24,7 +24,7 @@ used in used-car price prediction tutorials.
 ## Project structure
 
 ```
-car-price-app-fastapi-real/
+car-price-prediction/
 ├── main.py                # FastAPI app (routes + prediction logic)
 ├── train_model.py         # Downloads real dataset, trains, saves model
 ├── requirements.txt
