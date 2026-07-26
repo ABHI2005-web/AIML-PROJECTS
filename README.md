@@ -350,7 +350,7 @@ A FastAPI web app that predicts a used car's resale price using a RandomForestRe
 - **Tech stack:** Python, FastAPI, scikit-learn (RandomForestRegressor)
 - **Folder:** `car-price-prediction/`
 - **Live Demo:** **https://car-price-predictor-lesn.onrender.com**
-- **Dataset:** [Vehicle Dataset from CarDekho (Kaggle, nehalbirla)](https://www.kaggle.com/datasets/nehalbirla/vehicle-dataset-from-cardekho) — 301 real used-car listings: `Car_Name, Year, Selling_Price, Present_Price, Kms_Driven, Fuel_Type, Seller_Type, Transmission, Owner`
+- **Dataset:** [Vehicle Dataset from CarDekho (Kaggle, nehalbirla)](https://www.kaggle.com/datasets/nehalbirla/vehicle-dataset-from-cardekho) — (**not committed to repo**) 301 real used-car listings: `Car_Name, Year, Selling_Price, Present_Price, Kms_Driven, Fuel_Type, Seller_Type, Transmission, Owner`
 
 ### Project structure  
 
