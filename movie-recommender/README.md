@@ -25,7 +25,7 @@ step in plain English.
 ## Project structure
 
 ```
-movie-recommendation-system/
+movie-recommender/
 │
 ├── app.py                # Flask website (routes/pages)
 ├── recommender.py        # The recommendation "brain" (all the math)
