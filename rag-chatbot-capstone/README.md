@@ -27,7 +27,7 @@ categories" is accurate, "aware of every single news story" is not.
 ## Project structure
 
 ```
-News_Chatbot/
+rag-chatbot-capstone/
 ├── data/
 │   ├── news_articles.txt       <- auto-generated from live news on startup
 │   └── offline_fallback.txt    <- only used if no GNEWS_API_KEY is set
