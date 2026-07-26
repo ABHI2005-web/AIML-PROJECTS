@@ -7,7 +7,7 @@ This project trains an AI to land a spaceship safely, using:
 
 The project has two parts:
 1. **Training** (`train.py`) — you run this on your own computer, one time, to teach the AI.
-2. **Website** (`app.py`) — this is the small, light website you put on Render so your teacher can see the results online.
+2. **Website** (`app.py`) — this is the small, light website you put on Render so you  can see the results online.
 
 We split it this way because the training part needs big, heavy packages (PyTorch, Box2D) that are slow and sometimes tricky to install on free hosting. The website part only needs Flask, so it deploys fast and reliably.
 
@@ -20,7 +20,7 @@ If you'd like to retrain it yourself anyway (for example, to understand the code
 ## Folder overview
 
 ```
-LunarLander-PPO/
+lunarlander-rl/
 ├── train.py                     # Trains the AI (run this on your computer)
 ├── app.py                       # The website Flask shows on Render
 ├── requirements.txt             # Small package list, used by Render
@@ -108,7 +108,7 @@ TOTAL_TRAINING_STEPS = 1_000_000
 
 ## Step 5: Submit
 
-Copy the Render website link (it looks like `https://your-app-name.onrender.com`) and submit that link to your teacher. They will be able to open it and see:
+Copy the Render website link (it looks like `https://your-app-name.onrender.com`) . You will be able to open it and see:
 - Which algorithm you used (PPO)
 - How many steps you trained for
 - The AI's average score (236.64, which is above the 200 "solved" mark)
